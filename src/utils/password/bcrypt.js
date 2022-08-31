@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import config from "../../../config";
+import config from "../../../config.js";
 
 export const bcrypt_functions = {
     createHash: async (password) => {

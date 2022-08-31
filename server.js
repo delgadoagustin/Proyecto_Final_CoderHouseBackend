@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: config.mongoURL,
+        mongoUrl: config.MONGOURL,
         autoRemove: 'native',
         ttl: config.TTL
     }),
@@ -73,7 +73,7 @@ server.listen(port, ()=>{
 //CONFIGURACION PARA HABILITAR LA SESION Y GUARDAR EL TOKEN PARA VALIDAR
 socketManager(io, session({
     store: MongoStore.create({
-        mongoUrl: config.mongoURL,
+        mongoUrl: config.MONGOURL,
         autoRemove: 'native',
         ttl: config.TTL
     }),
