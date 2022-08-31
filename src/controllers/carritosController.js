@@ -1,22 +1,13 @@
 import { Dao } from "../daos/configDao.js";
 import { sendEmail } from "../utils/nodemailer/nodemailer.js";
 
+
+//CONTROLADORES PARA LAS RUTAS DE CARRITOS
+
+
 export const carritosController = {
-    agregarCarrito: (req, res) => {
-        try {
-            const carrito = {
-                email: req.body.email,
-                fechaYHora: Date.now(),
-                productos: [],
-                direccion: req.body.direccion
-            }
-            Dao.carritosMemoryDao.addOne(carrito);
-            res.status(200).send("Carrito Agregado.");
-        } catch (error) {
-            
-        }
-    },
-    
+       
+    //DEVUELVE EL CARRITO CORRESPONDIENTE AL USUARIO Y SI NO LO TIENE LO GENERA
     obtenerCarritoPorEmail: async (req, res) => {
         try {
             const email = req.user.email;
@@ -40,6 +31,7 @@ export const carritosController = {
         }
     },
 
+    //AGREGA PRODUCTO A TRAVES DEL ID, AL CARRITO DEL USUARIO INGRESADO
     agregarProductoACarrito: async (req, res) => {
         try {
             const {id, cantidad} = req.body
@@ -54,6 +46,7 @@ export const carritosController = {
         }
     },
     
+    //ELIMINA PRODUCTO A TRAVES DEL ID, AL CARRITO DEL USUARIO INGRESADO
     eliminarProductoPorId: async (req,res) => {
         try {
             const email = req.user.email;
@@ -77,6 +70,7 @@ export const carritosController = {
         }
     },
 
+    //CARGA LA ORDEN CON LOS ELEMENTOS DEL CARRITO Y LA ENVIA AL MAIL DEL USUARIO INGRESADO
     finalizarCompra: async (req,res) => {
         const email = req.user.email;
         const carrito = await Dao.carritos.getByEmail(email);

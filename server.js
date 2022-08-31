@@ -8,7 +8,6 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-
 //Socket
 
 import { Server } from 'socket.io';
@@ -59,7 +58,7 @@ app.use(session({
 }));
 
 //-------------------------
-
+//MOTOR DE PLANTILLAS
 app.engine('hbs', handlebars.engine({
     extname: '.hbs',
     layoutsDir: __dirname + '/src/views/layout'
@@ -71,6 +70,7 @@ server.listen(port, ()=>{
     console.log(`Corriendo en http://localhost:${port}`);
 })
 
+//CONFIGURACION PARA HABILITAR LA SESION Y GUARDAR EL TOKEN PARA VALIDAR
 socketManager(io, session({
     store: MongoStore.create({
         mongoUrl: config.mongoURL,
@@ -82,6 +82,7 @@ socketManager(io, session({
     saveUninitialized: false,
 }));
 
+//RUTAS
 app.use("/productos",productosRoutes);
 app.use(usuariosRoutes);
 app.use(carritosRoutes);

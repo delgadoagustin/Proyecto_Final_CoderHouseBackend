@@ -4,6 +4,7 @@ import { getToken } from "../utils/jwt/jwt.js";
 
 
 export const usuariosController = {
+    //VERIFICA QUE EL USUARIO ESTE INGRESADO, DE NO SER ASI LO REGISTRA Y DEVUELVE UN TOKEN
     registro: async(req, res) => {
         try {
             if(req.user){
@@ -32,10 +33,12 @@ export const usuariosController = {
         }
     },
 
+    //VISTA DE REGISTRO
     vistaRegistro: (req,res) => {
         res.render("register");
     },
 
+    //VERIFICA QUE NO ESTE INGRESADO, SINO VALIDA LOS DATOS Y DEVUELVE UN TOKEN
     login: async (req, res) => {
         try {
             if(!req.user){
@@ -68,10 +71,12 @@ export const usuariosController = {
         }
     },
 
+    //VISTA DE LOGIN
     vistaLogin: (req,res) => {
         res.render("login")
     },
 
+    //DESTRUYE LA SESION PERO NO INVALIDA EL TOKEN
     logout: (req, res) => {
         req.session.destroy(err=>{
             if(err){

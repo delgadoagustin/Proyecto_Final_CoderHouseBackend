@@ -3,6 +3,7 @@ import config from "../../config.js";
 
 export default {
 
+    //VERIFICA EL TOKEN DEL HEADER O DE LA SESION, SI ESTA HABILITADO LO PASA POR REQ.USER (EN ESTE CASO PASA EL USUARIO COMPLETO!!)
     checkAuthenticatedJWT: (req,res,next)=>{
         const authHeader = req.headers.authorization||req.session.token;
         if(!authHeader){
@@ -22,6 +23,7 @@ export default {
         })
     },
 
+    //VERIFICA SI EL ESTA LOGUEADO
     checkLoggedIn: (req,res,next) => {
         const authHeader = req.headers.authorization||req.session.token;
         if(!authHeader){
@@ -43,6 +45,7 @@ export default {
         }
     },
 
+    //VERIFICACION DE LOGUEO PARA REDIRECCION EN LAS VISTAS
     checkLoggedInView: (req,res,next) => {
         const authHeader = req.headers.authorization||req.session.token;
         if(!authHeader){

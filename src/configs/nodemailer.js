@@ -1,6 +1,7 @@
 import { createTransport } from "nodemailer";
 import config from "../../config.js";
 
+//CONFIGURACION BASICA PARA NODEMAILER
 export const transporter = createTransport({
     name: config.NODEMAILER_NAME,
     host: config.NODEMAILER_HOST,

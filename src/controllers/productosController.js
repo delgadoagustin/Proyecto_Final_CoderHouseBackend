@@ -1,7 +1,7 @@
 import { Dao } from "../daos/configDao.js"
 
 export const productosController = {
-    
+    //DEVUELVE TODOS LOS PRODUCTOS DE LA BASE DE DATOS
     obtenerTodosLosProductos: async(req, res) => {
         try {
             const productos = {
@@ -14,6 +14,7 @@ export const productosController = {
         
     },
 
+    //AGREGA UN PRODUCTO
     agregarProducto: (req,res) => {
         try {
             const producto = {
@@ -31,6 +32,7 @@ export const productosController = {
         }
     },
 
+    //DEVUELVE TODOS LOS PRODUCTOS QUE CONTENGAN LA CATEGORIA INGRESADA
     obtenerProductosPorCategoria: async (req, res) => {
         try {
             const categoria = req.params.categoria;
@@ -46,6 +48,7 @@ export const productosController = {
         }
     },
 
+    //DEVUELVE EL PRODUCTO CON ID COINCIDENTE
     obtenerProductosPorId: async (req, res) => {
         try {
             const id = req.params.id;
