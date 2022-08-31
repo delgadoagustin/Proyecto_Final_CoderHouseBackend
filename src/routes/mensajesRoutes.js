@@ -4,6 +4,6 @@ import authMiddleware from "../middlewares/authMiddleware.js";
 
 const mensajesRoutes = express.Router()
 
-mensajesRoutes.get("/mensajes",authMiddleware.checkAuthenticatedJWT, mensajesController.vista);
+mensajesRoutes.get("/chat",authMiddleware.checkAuthenticatedJWT, mensajesController.vista);
 
 export {mensajesRoutes};
