@@ -4,9 +4,7 @@ export const productosController = {
     //DEVUELVE TODOS LOS PRODUCTOS DE LA BASE DE DATOS
     obtenerTodosLosProductos: async(req, res) => {
         try {
-            const productos = {
-                Productos: await Dao.productos.getAll()
-            };
+            const productos = await Dao.productos.getAll();
             res.status(200).send(productos);
         } catch (error) {
 

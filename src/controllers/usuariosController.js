@@ -19,7 +19,12 @@ export const usuariosController = {
                     email: req.body.email,
                     password: await bcrypt_functions.createHash(req.body.password)
                 }
-                Dao.usuarios.addOne(usuario);
+                const user = await Dao.usuarios.addOne(usuario);
+                if(!user){
+                    res.status(200).send({
+                        msg: "Problemas al registrar"
+                    });
+                }
                 res.status(200).send({
                     msg: "Usuario Agregado",
                     token: getToken(usuario)

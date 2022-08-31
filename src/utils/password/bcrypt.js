@@ -3,7 +3,7 @@ import config from "../../../config.js";
 
 export const bcrypt_functions = {
     createHash: async (password) => {
-        const saltRounds = config.SALT_ROUNDS;
+        const saltRounds = 10;
         try {
             const salt = await bcrypt.genSalt(saltRounds);
             const hash = await bcrypt.hash(password, salt);

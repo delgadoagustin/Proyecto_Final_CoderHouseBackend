@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken"
+import jwt, { decode } from "jsonwebtoken"
 import config from "../../config.js";
 
 export default {
@@ -18,7 +18,7 @@ export default {
                     msg: "Usuario No Autorizado"
                 });
             }
-            req.user = decoded.usuario;
+            req.user = decoded;
             next();
         })
     },
@@ -36,6 +36,7 @@ export default {
                     return next()
                 }
                 else{
+                    req.user = decoded.usuario
                     return res.status(200).send({
                         msg: "Ya estas logueado"
                     })

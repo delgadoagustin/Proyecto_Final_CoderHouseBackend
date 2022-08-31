@@ -5,9 +5,9 @@ export class usuariosMongoDao {
         this.collection = usuarioModel;
     }
 
-    addOne(usuario){
+    async addOne(usuario){
         const nuevo = new this.collection(usuario);
-        nuevo.save();
+        return await nuevo.save();
     }
 
     async getByEmail(email, callback){
