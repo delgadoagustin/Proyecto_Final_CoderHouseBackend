@@ -1,15 +1,11 @@
 <div>
-    <h2>Bienvenido {{usuario.email}} </h2>
+    <h2>Bienvenido {{usuario.nombre}} </h2>
     <form action="/logout" method="get">
         <input type="submit" value="Desloguear">
     </form>
 </div>
 
 <form onsubmit="return addMessage(this)">
-    <div class="mb-3 m-3">
-        <h3>{{usuario.email}}</h3>
-    </div>
-    <br>
     <div id="messages" class="alert alert-secondary mb-3 m-3"></div>
     <div class="mb-3 m-3">
         <label for="cuerpo" class="form-label">Mensaje: </label>

@@ -13,7 +13,7 @@ import { carritosMongoDao } from "./mongoDaos/carritosMongoDao.js";
 import { ordenesMongoDao } from "./mongoDaos/ordenesMongoDao.js";
 import { mensajesMongoDao } from "./mongoDaos/mensajesMongoDao.js"
 
-let type = "mongo"; //Utilizado para gestionar rutas
+let type = "mongo"; //Utilizado para gestionar daos
 
 let Dao
 switch (type) {

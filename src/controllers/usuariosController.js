@@ -48,6 +48,11 @@ export const usuariosController = {
         try {
             if(!req.user){
                 const usuario = await Dao.usuarios.getByEmail(req.body.email);
+                if (!usuario) {
+                    res.status(401).send({
+                        msg: "Usuario Inexistente"
+                    })
+                }
                 const match = await bcrypt_functions.checkPass(req.body.password,usuario.password);
                 if(!match){
                     res.status(401).send({

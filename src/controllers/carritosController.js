@@ -10,11 +10,11 @@ export const carritosController = {
     //DEVUELVE EL CARRITO CORRESPONDIENTE AL USUARIO Y SI NO LO TIENE LO GENERA
     obtenerCarritoPorEmail: async (req, res) => {
         try {
-            const email = req.user.email;
+            const email = req.user.usuario.email;
             const carrito = await Dao.carritos.getByEmail(email);
             if(!carrito){
                 const carrito = {
-                    email: req.user.email,
+                    email: req.user.usuario.email,
                     fechaYHora: Date.now(),
                     productos: [],
                 }
@@ -35,8 +35,17 @@ export const carritosController = {
     agregarProductoACarrito: async (req, res) => {
         try {
             const {id, cantidad} = req.body
-            const email = req.user.email;
+            const email = req.user.usuario.email;
             const producto = await Dao.productos.getById(id);
+            const carrito = await Dao.carritos.getByEmail(email)
+            if(!carrito){
+                const nuevo = {
+                    email: req.user.usuario.email,
+                    fechaYHora: Date.now(),
+                    productos: [],
+                }
+                await Dao.carritos.addOne(nuevo);
+            }
             await Dao.carritos.addProducto(email, producto, cantidad);
             res.status(200).send({
                 result: `Producto Agregado al Carrito de ${email}`
@@ -49,7 +58,7 @@ export const carritosController = {
     //ELIMINA PRODUCTO A TRAVES DEL ID, AL CARRITO DEL USUARIO INGRESADO
     eliminarProductoPorId: async (req,res) => {
         try {
-            const email = req.user.email;
+            const email = req.user.usuario.email;
             const id = req.params.id;
             const carrito = await Dao.carritos.getByEmail(email)
             if(carrito.productos.findIndex(x => x.producto._id==id)!= -1){
@@ -72,7 +81,7 @@ export const carritosController = {
 
     //CARGA LA ORDEN CON LOS ELEMENTOS DEL CARRITO Y LA ENVIA AL MAIL DEL USUARIO INGRESADO
     finalizarCompra: async (req,res) => {
-        const email = req.user.email;
+        const email = req.user.usuario.email;
         const carrito = await Dao.carritos.getByEmail(email);
         if(!carrito||carrito.productos.length==0){
             res.send({
